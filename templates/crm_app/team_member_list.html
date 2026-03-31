@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}팀원 관리 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-people"></i> 팀원 관리</h2>
+    {% if user.is_staff or user.is_superuser %}
+    <a href="{% url 'team_member_add' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> 팀원 등록
+    </a>
+    {% endif %}
+</div>
+
+<!-- 필터 -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <select class="form-select" name="team">
+                    <option value="">전체 팀</option>
+                    {% for team in teams %}
+                        <option value="{{ team.id }}" {% if team_filter == team.id|stringformat:"s" %}selected{% endif %}>{{ team.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">검색</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 팀원 리스트 -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>팀</th>
+                        <th>이메일</th>
+                        <th>전화번호</th>
+                        <th>생성일</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in members %}
+                    <tr>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.team.name|default:"-" }}</td>
+                        <td>{{ member.email|default:"-" }}</td>
+                        <td>{{ member.phone|default:"-" }}</td>
+                        <td>{{ member.created_at|date:"Y-m-d" }}</td>
+                        <td>
+                            {% if user.is_staff or user.is_superuser %}
+                            <a href="{% url 'team_member_edit' member.pk %}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'team_member_delete' member.pk %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                            {% else %}
+                            <span class="text-muted">읽기 전용</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">등록된 팀원이 없습니다.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

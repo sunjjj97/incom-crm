@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}사용자 관리 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-person-plus"></i> 사용자 관리</h2>
+    <a href="{% url 'user_add' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> 사용자 추가
+    </a>
+</div>
+
+<!-- 필터 -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="search" placeholder="아이디, 이메일, 이름 검색" value="{{ search }}">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" name="is_staff">
+                    <option value="">전체 권한</option>
+                    <option value="true" {% if is_staff_filter == 'true' %}selected{% endif %}>관리자</option>
+                    <option value="false" {% if is_staff_filter == 'false' %}selected{% endif %}>일반 사용자</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" name="is_active">
+                    <option value="">전체 상태</option>
+                    <option value="true" {% if is_active_filter == 'true' %}selected{% endif %}>활성</option>
+                    <option value="false" {% if is_active_filter == 'false' %}selected{% endif %}>비활성</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">검색</button>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'user_list' %}" class="btn btn-secondary w-100">초기화</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 사용자 리스트 -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                        <th>관리자</th>
+                        <th>슈퍼유저</th>
+                        <th>활성</th>
+                        <th>가입일</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user_obj in users %}
+                    <tr>
+                        <td>{{ user_obj.username }}</td>
+                        <td>{{ user_obj.get_full_name|default:"-" }}</td>
+                        <td>{{ user_obj.email|default:"-" }}</td>
+                        <td>
+                            {% if user_obj.is_staff %}
+                                <span class="badge bg-success">예</span>
+                            {% else %}
+                                <span class="badge bg-secondary">아니오</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user_obj.is_superuser %}
+                                <span class="badge bg-danger">예</span>
+                            {% else %}
+                                <span class="badge bg-secondary">아니오</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user_obj.is_active %}
+                                <span class="badge bg-success">활성</span>
+                            {% else %}
+                                <span class="badge bg-secondary">비활성</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ user_obj.date_joined|date:"Y-m-d" }}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'user_edit' user_obj.pk %}" class="btn btn-sm btn-outline-primary" title="수정">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'user_change_password' user_obj.pk %}" class="btn btn-sm btn-outline-warning" title="비밀번호 변경">
+                                    <i class="bi bi-key"></i>
+                                </a>
+                                <a href="{% url 'user_delete' user_obj.pk %}" class="btn btn-sm btn-outline-danger" title="삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">등록된 사용자가 없습니다.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

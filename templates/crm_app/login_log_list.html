@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}로그인 로그 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-clock-history"></i> 로그인 로그</h2>
+</div>
+
+<!-- 필터 -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="search" placeholder="아이디, IP 주소 검색" value="{{ search }}">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="success">
+                    <option value="">전체</option>
+                    <option value="true" {% if success_filter == 'true' %}selected{% endif %}>성공</option>
+                    <option value="false" {% if success_filter == 'false' %}selected{% endif %}>실패</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">검색</button>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'login_log_list' %}" class="btn btn-secondary w-100">초기화</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 로그 목록 -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">로그인 로그 목록</h5>
+    </div>
+    <div class="card-body">
+        {% if logs %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>로그인 시간</th>
+                        <th>아이디</th>
+                        <th>IP 주소</th>
+                        <th>결과</th>
+                        <th>실패 사유</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.login_time|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ log.username }}</td>
+                        <td>{{ log.ip_address|default:"-" }}</td>
+                        <td>
+                            {% if log.success %}
+                            <span class="badge bg-success">성공</span>
+                            {% else %}
+                            <span class="badge bg-danger">실패</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ log.failure_reason|default:"-" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 페이지네이션 -->
+        {% if page_obj.has_other_pages %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1{% if search %}&search={{ search }}{% endif %}{% if success_filter %}&success={{ success_filter }}{% endif %}">처음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}{% if success_filter %}&success={{ success_filter }}{% endif %}">이전</a>
+                </li>
+                {% endif %}
+                
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+                
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}{% if success_filter %}&success={{ success_filter }}{% endif %}">다음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}{% if success_filter %}&success={{ success_filter }}{% endif %}">마지막</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+        {% else %}
+        <p class="text-muted text-center">로그인 로그가 없습니다.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

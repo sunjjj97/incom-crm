@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}매출 관리 - 인컴 CRM{% endblock %}
+
+{% block extra_css %}
+<style>
+    .sales-table {
+        font-size: 0.95rem;
+    }
+    .sales-table thead th {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #dee2e6;
+        font-weight: 600;
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    .sales-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    .sales-table .text-end {
+        text-align: right;
+    }
+    .summary-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    .filter-card {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 767.98px) {
+        .sales-table {
+            font-size: 0.85rem;
+        }
+        .summary-card {
+            padding: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+    <h2 class="mb-3 mb-md-0"><i class="bi bi-cash-stack"></i> 매출 관리</h2>
+    <div class="d-flex flex-column flex-md-row gap-2">
+        {% if user.is_staff or user.is_superuser %}
+        <a href="{% url 'sales_bulk_upload' %}" class="btn btn-info btn-sm">
+            <i class="bi bi-file-earmark-spreadsheet"></i> 엑셀 일괄 등록
+        </a>
+        <a href="{% url 'sales_add' %}" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-circle"></i> 매출 등록
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 총 매출 요약 (관리자만 표시) -->
+{% if user.is_staff or user.is_superuser %}
+<div class="summary-card">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <div class="small opacity-75">총 매출</div>
+            <h3 class="mb-0">{{ total_sales|floatformat:0|intcomma }}원</h3>
+        </div>
+        <div class="text-end">
+            <div class="small opacity-75">조회 건수</div>
+            <h5 class="mb-0">{{ page_obj.paginator.count }}건</h5>
+        </div>
+    </div>
+</div>
+{% else %}
+<!-- 일반 사용자용 간단한 정보 -->
+<div class="alert alert-light mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="text-muted">조회 건수</span>
+        <strong>{{ page_obj.paginator.count }}건</strong>
+    </div>
+</div>
+{% endif %}
+
+<!-- 필터 -->
+<div class="filter-card">
+    <form method="get" class="row g-3">
+        <div class="col-12 col-md-4">
+            <label class="form-label mb-2 fw-semibold">검색</label>
+            <input type="text" class="form-control form-control-sm" name="search" placeholder="업체명, 대표자명, 전화번호 검색" value="{{ search }}">
+            <input type="hidden" name="page" value="1">
+        </div>
+        <div class="col-12 col-md-2">
+            <label class="form-label mb-2 fw-semibold">팀</label>
+            <select class="form-select form-select-sm" name="team">
+                <option value="">전체 팀</option>
+                {% for team in teams %}
+                    <option value="{{ team.id }}" {% if team_filter == team.id|stringformat:"s" %}selected{% endif %}>{{ team.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-12 col-md-2">
+            <label class="form-label mb-2 fw-semibold">팀원</label>
+            <select class="form-select form-select-sm" name="member">
+                <option value="">전체 팀원</option>
+                {% for member in members %}
+                    <option value="{{ member.id }}" {% if member_filter == member.id|stringformat:"s" %}selected{% endif %}>{{ member.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-12 col-md-2">
+            <label class="form-label mb-2 fw-semibold">년도</label>
+            <input type="number" class="form-control form-control-sm" name="year" placeholder="년도" value="{{ year_filter }}">
+        </div>
+        <div class="col-12 col-md-2">
+            <label class="form-label mb-2 fw-semibold">월</label>
+            <div class="d-flex gap-2">
+                <input type="number" class="form-control form-control-sm" name="month" placeholder="월" min="1" max="12" value="{{ month_filter }}">
+                <button type="submit" class="btn btn-primary btn-sm">검색</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- 매출 리스트 -->
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped sales-table mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">업체명</th>
+                        <th style="width: 100px;" class="text-center">계약 유형</th>
+                        <th style="width: 120px;">대표자명</th>
+                        <th style="width: 130px;">전화번호</th>
+                        <th style="width: 110px;" class="text-center">계약일</th>
+                        <th style="width: 110px;" class="text-center">만료일</th>
+                        <th style="width: 130px;" class="text-end">결제금액</th>
+                        <th style="width: 100px;">담당 팀원</th>
+                        <th style="width: 100px;">담당 팀</th>
+                        {% if user.is_staff or user.is_superuser %}
+                        <th style="width: 120px;" class="text-center">작업</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>
+                            <strong>{{ sale.company_name }}</strong>
+                        </td>
+                        <td class="text-center">
+                            {% if sale.contract_type %}
+                            <span class="badge bg-{{ sale.get_contract_type_display_class }}">
+                                {{ sale.get_contract_type_display }}
+                            </span>
+                            {% else %}
+                            <span class="badge bg-secondary">신규</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ sale.representative|default:"-" }}</td>
+                        <td>{{ sale.phone|default:"-" }}</td>
+                        <td class="text-center">{{ sale.contract_date|date:"Y-m-d" }}</td>
+                        <td class="text-center">{{ sale.contract_expiry|date:"Y-m-d" }}</td>
+                        <td class="text-end">
+                            <strong class="text-primary">{{ sale.payment_amount|floatformat:0|intcomma }}</strong>원
+                        </td>
+                        <td>{{ sale.team_member.name|default:"-" }}</td>
+                        <td>{{ sale.team.name|default:"-" }}</td>
+                        {% if user.is_staff or user.is_superuser %}
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="{% url 'sales_edit' sale.pk %}" class="btn btn-outline-primary" title="수정">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'sales_delete' sale.pk %}" class="btn btn-outline-danger" title="삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="{% if user.is_staff or user.is_superuser %}10{% else %}9{% endif %}" class="text-center text-muted py-5">
+                            <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                            <div class="mt-2">등록된 매출이 없습니다.</div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 페이지네이션 -->
+        {% if page_obj.has_other_pages %}
+        <nav aria-label="Page navigation" class="p-3 border-top">
+            <ul class="pagination justify-content-center mb-0">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}{% if member_filter %}&member={{ member_filter }}{% endif %}{% if year_filter %}&year={{ year_filter }}{% endif %}{% if month_filter %}&month={{ month_filter }}{% endif %}">처음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}{% if member_filter %}&member={{ member_filter }}{% endif %}{% if year_filter %}&year={{ year_filter }}{% endif %}{% if month_filter %}&month={{ month_filter }}{% endif %}">이전</a>
+                </li>
+                {% endif %}
+                
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+                
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}{% if member_filter %}&member={{ member_filter }}{% endif %}{% if year_filter %}&year={{ year_filter }}{% endif %}{% if month_filter %}&month={{ month_filter }}{% endif %}">다음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}{% if member_filter %}&member={{ member_filter }}{% endif %}{% if year_filter %}&year={{ year_filter }}{% endif %}{% if month_filter %}&month={{ month_filter }}{% endif %}">마지막</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

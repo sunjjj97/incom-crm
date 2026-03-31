@@ -1,0 +1,716 @@
+[
+{
+  "model": "crm_app.contractcompany",
+  "pk": 1,
+  "fields": {
+    "company_name": "힐링브리즈 (지유의원)\t",
+    "representative": "OOO",
+    "phone": "01000000000",
+    "contract_date": "2025-11-17",
+    "contract_expiry": "2025-11-18",
+    "payment_amount": "5500000.00",
+    "team_member": 9,
+    "team": 7,
+    "notes": "",
+    "created_at": "2025-11-17T11:46:37.607Z",
+    "updated_at": "2025-11-17T11:46:37.607Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 2,
+  "fields": {
+    "company_name": "뮤엠영어부평힐스테이트",
+    "representative": "OOO",
+    "phone": "01000000000",
+    "contract_date": "2025-11-17",
+    "contract_expiry": "2026-02-17",
+    "payment_amount": "1320000.00",
+    "team_member": 3,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T11:47:12.358Z",
+    "updated_at": "2025-11-17T11:47:12.358Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 3,
+  "fields": {
+    "company_name": "스마트해법영어청천대우점",
+    "representative": "OOO",
+    "phone": "01000000000",
+    "contract_date": "2025-11-17",
+    "contract_expiry": "2026-02-17",
+    "payment_amount": "1320000.00",
+    "team_member": 3,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T11:47:38.124Z",
+    "updated_at": "2025-11-17T11:47:38.124Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 4,
+  "fields": {
+    "company_name": "옥길뉴턴수학학원",
+    "representative": "OOO",
+    "phone": "01000000000",
+    "contract_date": "2025-11-17",
+    "contract_expiry": "2026-02-17",
+    "payment_amount": "1200000.00",
+    "team_member": 12,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T11:48:05.158Z",
+    "updated_at": "2025-11-17T11:48:05.158Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 5,
+  "fields": {
+    "company_name": "데이뷰의원",
+    "representative": "OOO",
+    "phone": "01000000000",
+    "contract_date": "2025-11-01",
+    "contract_expiry": "2025-12-01",
+    "payment_amount": "2600000.00",
+    "team_member": 8,
+    "team": 4,
+    "notes": "",
+    "created_at": "2025-11-17T12:17:21.628Z",
+    "updated_at": "2025-11-17T12:17:21.628Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 6,
+  "fields": {
+    "company_name": "브리에에스테틱",
+    "representative": "OOO",
+    "phone": "01075341193",
+    "contract_date": "2025-11-04",
+    "contract_expiry": "2026-02-04",
+    "payment_amount": "1090000.00",
+    "team_member": 2,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:18:10.427Z",
+    "updated_at": "2025-11-17T12:18:10.427Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 7,
+  "fields": {
+    "company_name": "목동김연희영어교습소",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-04",
+    "contract_expiry": "2026-02-04",
+    "payment_amount": "1200000.00",
+    "team_member": 6,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:22:07.544Z",
+    "updated_at": "2025-11-17T12:22:07.544Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 8,
+  "fields": {
+    "company_name": "제주좋은사람클린케어",
+    "representative": null,
+    "phone": "01067561111",
+    "contract_date": "2025-11-04",
+    "contract_expiry": "2026-05-04",
+    "payment_amount": "2400000.00",
+    "team_member": 13,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:22:52.877Z",
+    "updated_at": "2025-11-17T12:22:52.877Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 9,
+  "fields": {
+    "company_name": "해법독서논술 위례교실",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-04",
+    "contract_expiry": "2026-02-04",
+    "payment_amount": "1090000.00",
+    "team_member": 7,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:23:26.894Z",
+    "updated_at": "2025-11-17T12:23:26.894Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 10,
+  "fields": {
+    "company_name": "수스파&에스테틱",
+    "representative": null,
+    "phone": "01091001627",
+    "contract_date": "2025-11-04",
+    "contract_expiry": "2025-12-04",
+    "payment_amount": "500000.00",
+    "team_member": 16,
+    "team": 8,
+    "notes": "",
+    "created_at": "2025-11-17T12:25:40.611Z",
+    "updated_at": "2025-11-17T12:25:40.611Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 11,
+  "fields": {
+    "company_name": "어맥헤어프로젝트 첨단점",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-04",
+    "contract_expiry": "2026-02-04",
+    "payment_amount": "1090000.00",
+    "team_member": 11,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:26:13.112Z",
+    "updated_at": "2025-11-17T12:27:51.411Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 12,
+  "fields": {
+    "company_name": "필즈더클래식 다산센터",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-05",
+    "contract_expiry": "2026-02-05",
+    "payment_amount": "1090000.00",
+    "team_member": 3,
+    "team": 6,
+    "notes": "",
+    "created_at": "2025-11-17T12:27:08.444Z",
+    "updated_at": "2025-11-17T12:27:08.444Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 13,
+  "fields": {
+    "company_name": "순수수학영어학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-05",
+    "contract_expiry": "2026-02-05",
+    "payment_amount": "1200000.00",
+    "team_member": 11,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:27:42.195Z",
+    "updated_at": "2025-11-17T12:27:55.795Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 14,
+  "fields": {
+    "company_name": "장전점 슈퍼스타어학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-05",
+    "contract_expiry": "2026-02-05",
+    "payment_amount": "1090000.00",
+    "team_member": 15,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:28:55.511Z",
+    "updated_at": "2025-11-17T12:28:55.511Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 15,
+  "fields": {
+    "company_name": "세기냉난방시스템평생직업교육학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1200000.00",
+    "team_member": 6,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:29:23.028Z",
+    "updated_at": "2025-11-17T12:29:23.028Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 16,
+  "fields": {
+    "company_name": "아크로 영어학원 ",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1090000.00",
+    "team_member": 12,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:29:50.178Z",
+    "updated_at": "2025-11-17T12:29:50.178Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 17,
+  "fields": {
+    "company_name": "어썸기타학원 마곡점",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2025-12-06",
+    "payment_amount": "550000.00",
+    "team_member": 12,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:30:28.395Z",
+    "updated_at": "2025-11-17T12:30:28.395Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 18,
+  "fields": {
+    "company_name": "화담모터스",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2025-12-06",
+    "payment_amount": "500000.00",
+    "team_member": 1,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:30:59.845Z",
+    "updated_at": "2025-11-17T12:30:59.845Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 19,
+  "fields": {
+    "company_name": "능곡에듀학원",
+    "representative": null,
+    "phone": "01055858921",
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1090000.00",
+    "team_member": 7,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:31:29.162Z",
+    "updated_at": "2025-11-17T12:31:29.162Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 20,
+  "fields": {
+    "company_name": "느루진독서심리상담치료센터",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1200000.00",
+    "team_member": 11,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:31:52.428Z",
+    "updated_at": "2025-11-17T12:31:52.428Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 21,
+  "fields": {
+    "company_name": "타로명당",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1090000.00",
+    "team_member": 12,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:32:26.212Z",
+    "updated_at": "2025-11-17T12:32:26.212Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 22,
+  "fields": {
+    "company_name": "SJ클쌤영어",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1090000.00",
+    "team_member": 3,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:33:03.445Z",
+    "updated_at": "2025-11-17T12:33:03.445Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 23,
+  "fields": {
+    "company_name": "입주청소(신창클린)",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1200000.00",
+    "team_member": 17,
+    "team": 9,
+    "notes": "",
+    "created_at": "2025-11-17T12:34:19.213Z",
+    "updated_at": "2025-11-17T12:34:19.213Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 24,
+  "fields": {
+    "company_name": "광주MS실용음악학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1090000.00",
+    "team_member": 3,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:34:45.079Z",
+    "updated_at": "2025-11-17T12:34:45.079Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 25,
+  "fields": {
+    "company_name": "더건강풋앤바디",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-06",
+    "contract_expiry": "2026-02-06",
+    "payment_amount": "1200000.00",
+    "team_member": 2,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:35:18.145Z",
+    "updated_at": "2025-11-17T12:35:18.145Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 26,
+  "fields": {
+    "company_name": "리포데이 re4day (주)와우바이오",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-07",
+    "contract_expiry": "2025-12-07",
+    "payment_amount": "17600000.00",
+    "team_member": 14,
+    "team": 5,
+    "notes": "",
+    "created_at": "2025-11-17T12:35:48.962Z",
+    "updated_at": "2025-11-17T12:35:48.962Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 27,
+  "fields": {
+    "company_name": "리틀가이드",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-07",
+    "contract_expiry": "2026-02-07",
+    "payment_amount": "1200000.00",
+    "team_member": 13,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:36:12.362Z",
+    "updated_at": "2025-11-17T12:36:12.362Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 28,
+  "fields": {
+    "company_name": "지혜의숲 둔산센터",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "825000.00",
+    "team_member": 15,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:36:48.180Z",
+    "updated_at": "2025-11-17T12:36:48.180Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 29,
+  "fields": {
+    "company_name": "에스팀뷰티",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1200000.00",
+    "team_member": 3,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:37:15.796Z",
+    "updated_at": "2025-11-17T12:37:15.796Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 30,
+  "fields": {
+    "company_name": "핏티 다이어트&필라테스 구의점",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1090000.00",
+    "team_member": 2,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:37:38.922Z",
+    "updated_at": "2025-11-17T12:37:38.922Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 31,
+  "fields": {
+    "company_name": "더블유짐크라브마가",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2025-11-10",
+    "payment_amount": "220000.00",
+    "team_member": 16,
+    "team": 8,
+    "notes": "",
+    "created_at": "2025-11-17T12:38:01.663Z",
+    "updated_at": "2025-11-17T12:38:01.663Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 32,
+  "fields": {
+    "company_name": "Kup",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2025-12-22",
+    "payment_amount": "4950000.00",
+    "team_member": 14,
+    "team": 5,
+    "notes": "",
+    "created_at": "2025-11-17T12:38:21.146Z",
+    "updated_at": "2025-11-17T12:38:21.146Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 33,
+  "fields": {
+    "company_name": "응암동핫타이",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-01-19",
+    "payment_amount": "990000.00",
+    "team_member": 18,
+    "team": 6,
+    "notes": "",
+    "created_at": "2025-11-17T12:39:10.112Z",
+    "updated_at": "2025-11-17T12:39:10.112Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 34,
+  "fields": {
+    "company_name": "막창꽃필무렵",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-01-19",
+    "payment_amount": "660000.00",
+    "team_member": 14,
+    "team": 5,
+    "notes": "",
+    "created_at": "2025-11-17T12:39:38.046Z",
+    "updated_at": "2025-11-17T12:39:38.046Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 35,
+  "fields": {
+    "company_name": "전일학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1200000.00",
+    "team_member": 7,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:40:01.096Z",
+    "updated_at": "2025-11-17T12:40:01.096Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 36,
+  "fields": {
+    "company_name": "청명역학당",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1200000.00",
+    "team_member": 11,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:40:23.412Z",
+    "updated_at": "2025-11-17T12:40:23.412Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 37,
+  "fields": {
+    "company_name": "라이프위드짐",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1200000.00",
+    "team_member": 12,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:40:46.628Z",
+    "updated_at": "2025-11-17T12:40:46.628Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 38,
+  "fields": {
+    "company_name": "리틀댕레스트",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1320000.00",
+    "team_member": 6,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:41:13.779Z",
+    "updated_at": "2025-11-17T12:41:13.779Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 40,
+  "fields": {
+    "company_name": "미래엔수학 뮤엠영어 센트럴학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1090000.00",
+    "team_member": 11,
+    "team": 2,
+    "notes": "",
+    "created_at": "2025-11-17T12:45:03.580Z",
+    "updated_at": "2025-11-17T12:45:03.580Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 41,
+  "fields": {
+    "company_name": "김태연수학학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-17",
+    "payment_amount": "1090000.00",
+    "team_member": 6,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:45:35.146Z",
+    "updated_at": "2025-11-17T12:45:35.146Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 42,
+  "fields": {
+    "company_name": "아이비스영어학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-17",
+    "contract_expiry": "2025-11-17",
+    "payment_amount": "300000.00",
+    "team_member": 14,
+    "team": 1,
+    "notes": "",
+    "created_at": "2025-11-17T12:45:57.913Z",
+    "updated_at": "2025-11-17T12:45:57.913Z"
+  }
+},
+{
+  "model": "crm_app.contractcompany",
+  "pk": 43,
+  "fields": {
+    "company_name": "초록국어 전문학원",
+    "representative": null,
+    "phone": null,
+    "contract_date": "2025-11-10",
+    "contract_expiry": "2026-02-10",
+    "payment_amount": "1200000.00",
+    "team_member": 6,
+    "team": 3,
+    "notes": "",
+    "created_at": "2025-11-17T12:46:54.996Z",
+    "updated_at": "2025-11-17T12:46:54.996Z"
+  }
+}
+]

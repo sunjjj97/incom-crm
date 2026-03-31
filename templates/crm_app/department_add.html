@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}사업부 등록 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-plus-circle"></i> 사업부 등록</h2>
+    <a href="{% url 'department_list' %}" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> 목록으로
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">사업부명 <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'department_list' %}" class="btn btn-secondary me-2">취소</a>
+                <button type="submit" class="btn btn-primary">등록</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

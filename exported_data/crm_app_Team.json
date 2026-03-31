@@ -1,0 +1,83 @@
+[
+{
+  "model": "crm_app.team",
+  "pk": 1,
+  "fields": {
+    "name": "KR 0팀",
+    "department": 2,
+    "created_at": "2025-11-17T11:37:02.172Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 2,
+  "fields": {
+    "name": "2팀",
+    "department": 2,
+    "created_at": "2025-11-17T11:37:07.396Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 3,
+  "fields": {
+    "name": "4팀",
+    "department": 2,
+    "created_at": "2025-11-17T11:37:10.668Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 4,
+  "fields": {
+    "name": "미팅",
+    "department": 2,
+    "created_at": "2025-11-17T11:41:50.523Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 5,
+  "fields": {
+    "name": "TW 0팀",
+    "department": 1,
+    "created_at": "2025-11-17T11:43:35.881Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 6,
+  "fields": {
+    "name": "1팀",
+    "department": 1,
+    "created_at": "2025-11-17T11:43:43.589Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 7,
+  "fields": {
+    "name": "TW 1팀",
+    "department": 1,
+    "created_at": "2025-11-17T11:44:38.947Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 8,
+  "fields": {
+    "name": "5팀",
+    "department": 2,
+    "created_at": "2025-11-17T12:24:57.261Z"
+  }
+},
+{
+  "model": "crm_app.team",
+  "pk": 9,
+  "fields": {
+    "name": "6팀",
+    "department": 2,
+    "created_at": "2025-11-17T12:33:43.672Z"
+  }
+}
+]

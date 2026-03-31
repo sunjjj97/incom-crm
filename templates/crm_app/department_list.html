@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}사업부 관리 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-building"></i> 사업부 관리</h2>
+    {% if user.is_staff or user.is_superuser %}
+    <a href="{% url 'department_add' %}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> 사업부 등록
+    </a>
+    {% endif %}
+</div>
+
+<!-- 사업부 리스트 -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>사업부명</th>
+                        <th>생성일</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for department in departments %}
+                    <tr>
+                        <td>{{ department.name }}</td>
+                        <td>{{ department.created_at|date:"Y-m-d" }}</td>
+                        <td>
+                            {% if user.is_staff or user.is_superuser %}
+                            <a href="{% url 'department_edit' department.pk %}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'department_delete' department.pk %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                            {% else %}
+                            <span class="text-muted">읽기 전용</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">등록된 사업부가 없습니다.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

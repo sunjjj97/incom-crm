@@ -1,0 +1,206 @@
+[
+{
+  "model": "crm_app.teammember",
+  "pk": 1,
+  "fields": {
+    "user": null,
+    "name": "김하연",
+    "team": 1,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:38:15.724Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 2,
+  "fields": {
+    "user": null,
+    "name": "남영우",
+    "team": 1,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:40:28.719Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 3,
+  "fields": {
+    "user": null,
+    "name": "이현우",
+    "team": 1,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:41:01.392Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 5,
+  "fields": {
+    "user": null,
+    "name": "이성민",
+    "team": 3,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:41:17.724Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 6,
+  "fields": {
+    "user": null,
+    "name": "김태형",
+    "team": 3,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:41:24.557Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 7,
+  "fields": {
+    "user": null,
+    "name": "김민우",
+    "team": 3,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:41:30.290Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 8,
+  "fields": {
+    "user": null,
+    "name": "김희라",
+    "team": 4,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:41:57.740Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 9,
+  "fields": {
+    "user": null,
+    "name": "나병훈",
+    "team": 7,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:42:08.465Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 10,
+  "fields": {
+    "user": null,
+    "name": "서원호",
+    "team": 2,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:42:17.140Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 11,
+  "fields": {
+    "user": null,
+    "name": "이승결",
+    "team": 1,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:42:36.125Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 12,
+  "fields": {
+    "user": null,
+    "name": "천명서",
+    "team": 2,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:42:43.123Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 13,
+  "fields": {
+    "user": null,
+    "name": "장동희",
+    "team": 2,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:42:48.723Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 14,
+  "fields": {
+    "user": null,
+    "name": "신현준",
+    "team": 5,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:43:02.740Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 15,
+  "fields": {
+    "user": null,
+    "name": "최강준",
+    "team": 1,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T11:43:07.590Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 16,
+  "fields": {
+    "user": null,
+    "name": "가인표",
+    "team": 8,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T12:25:05.614Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 17,
+  "fields": {
+    "user": null,
+    "name": "신예찬",
+    "team": 9,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T12:33:49.573Z"
+  }
+},
+{
+  "model": "crm_app.teammember",
+  "pk": 18,
+  "fields": {
+    "user": null,
+    "name": "천승빈",
+    "team": 6,
+    "email": null,
+    "phone": null,
+    "created_at": "2025-11-17T12:38:52.662Z"
+  }
+}
+]

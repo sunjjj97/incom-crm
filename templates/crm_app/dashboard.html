@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}대시보드 - 인컴 CRM{% endblock %}
+
+{% block extra_css %}
+<style>
+    .performance-table {
+        font-size: 0.95rem;
+    }
+    .performance-table thead th {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #dee2e6;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .performance-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    .performance-table .text-end {
+        text-align: right;
+    }
+    .performance-table .total-row {
+        background-color: #fff3cd !important;
+        font-weight: 600;
+    }
+    .performance-filter {
+        background-color: #f8f9fa;
+        padding: 1.25rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+    .stat-summary {
+        background-color: #e9ecef;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+    }
+    .stat-summary .stat-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .stat-summary .stat-item:last-child {
+        border-bottom: none;
+    }
+    @media (max-width: 767.98px) {
+        .performance-table {
+            font-size: 0.85rem;
+        }
+        .performance-filter {
+            padding: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+    <h2 class="mb-2 mb-md-0"><i class="bi bi-speedometer2"></i> 대시보드</h2>
+</div>
+
+<!-- 요약 통계 (텍스트 형식) -->
+<div class="stat-summary">
+    <div class="row">
+        {% if user.is_staff or user.is_superuser %}
+        <div class="col-6 col-md-3 stat-item">
+            <div class="text-muted small">전체 매출</div>
+            <div class="fw-bold">{{ total_sales|floatformat:0|intcomma }}원</div>
+        </div>
+        {% endif %}
+        <div class="col-6 col-md-3 stat-item">
+            <div class="text-muted small">이번 달 매출</div>
+            <div class="fw-bold">{{ monthly_sales|floatformat:0|intcomma }}원</div>
+        </div>
+        <div class="col-6 col-md-3 stat-item">
+            <div class="text-muted small">당일 매출</div>
+            <div class="fw-bold">{{ daily_sales|floatformat:0|intcomma }}원</div>
+        </div>
+        <div class="col-6 col-md-3 stat-item">
+            <div class="text-muted small">전체 계약업체</div>
+            <div class="fw-bold">{{ total_companies }}개</div>
+        </div>
+    </div>
+</div>
+
+<!-- 필터 섹션 -->
+<div class="performance-filter">
+    <form method="get" action="{% url 'dashboard' %}" id="filterForm">
+        <div class="row g-3 align-items-end">
+            <div class="col-12 col-md-2">
+                <label for="date" class="form-label mb-1 fw-semibold">날짜</label>
+                <input type="month" class="form-control form-control-sm" id="date" name="date" value="{{ filter_date }}" onchange="document.getElementById('filterForm').submit();">
+            </div>
+            <div class="col-12 col-md-2">
+                <label for="department" class="form-label mb-1 fw-semibold">부서</label>
+                <select class="form-select form-select-sm" id="department" name="department" onchange="document.getElementById('filterForm').submit();">
+                    <option value="">전체</option>
+                    {% for dept in departments %}
+                    <option value="{{ dept.id }}" {% if filter_department_id == dept.id %}selected{% endif %}>{{ dept.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-2">
+                <label for="team" class="form-label mb-1 fw-semibold">팀</label>
+                <select class="form-select form-select-sm" id="team" name="team" onchange="document.getElementById('filterForm').submit();">
+                    <option value="">전체</option>
+                    {% for team in teams_filter %}
+                    <option value="{{ team.id }}" {% if filter_team_id == team.id %}selected{% endif %}>{{ team.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="form-label mb-1 fw-semibold d-block">실적 유형</label>
+                <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" name="performance_type" id="performance_dept" value="department" {% if performance_type == 'department' %}checked{% endif %} onchange="document.getElementById('filterForm').submit();">
+                    <label class="btn btn-outline-primary btn-sm" for="performance_dept">부서실적</label>
+                    
+                    <input type="radio" class="btn-check" name="performance_type" id="performance_team" value="team" {% if performance_type == 'team' %}checked{% endif %} onchange="document.getElementById('filterForm').submit();">
+                    <label class="btn btn-outline-primary btn-sm" for="performance_team">팀실적</label>
+                    
+                    <input type="radio" class="btn-check" name="performance_type" id="performance_personal" value="personal" {% if performance_type == 'personal' %}checked{% endif %} onchange="document.getElementById('filterForm').submit();">
+                    <label class="btn btn-outline-primary btn-sm" for="performance_personal">개인실적</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <button type="button" class="btn btn-secondary btn-sm w-100" onclick="resetFilter()">초기화</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- 실적 테이블 -->
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">
+            {% if performance_type == 'department' %}부서실적
+            {% elif performance_type == 'team' %}팀실적
+            {% else %}개인실적
+            {% endif %} 
+            - {{ current_year }}년 {{ current_month }}월
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped performance-table mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;" class="text-center">연번</th>
+                        {% if performance_type == 'department' %}
+                        <th>부서</th>
+                        {% elif performance_type == 'team' %}
+                        <th>팀</th>
+                        {% else %}
+                        <th>이름</th>
+                        {% endif %}
+                        <th style="width: 120px;" class="text-center">날짜</th>
+                        <th style="width: 150px;" class="text-end">금액</th>
+                        <th style="width: 100px;" class="text-center">건수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if performance_type == 'department' %}
+                        {% for dept in department_performance %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td>{{ dept.name }}</td>
+                            <td class="text-center">{{ current_year }}-{{ current_month|stringformat:"02d" }}</td>
+                            <td class="text-end">{{ dept.value|floatformat:0|intcomma }}</td>
+                            <td class="text-center">{{ dept.count }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">표시할 데이터가 없습니다.</td>
+                        </tr>
+                        {% endfor %}
+                        {% if department_performance %}
+                        <tr class="total-row">
+                            <td colspan="3" class="text-center fw-bold">합계</td>
+                            <td class="text-end fw-bold">{{ dept_total_amount|floatformat:0|intcomma }}</td>
+                            <td class="text-center fw-bold">{{ dept_total_count }}</td>
+                        </tr>
+                        {% endif %}
+                    {% elif performance_type == 'team' %}
+                        {% for team in team_performance %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td>{{ team.name }}</td>
+                            <td class="text-center">{{ current_year }}-{{ current_month|stringformat:"02d" }}</td>
+                            <td class="text-end">{{ team.value|floatformat:0|intcomma }}</td>
+                            <td class="text-center">{{ team.count }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">표시할 데이터가 없습니다.</td>
+                        </tr>
+                        {% endfor %}
+                        {% if team_performance %}
+                        <tr class="total-row">
+                            <td colspan="3" class="text-center fw-bold">합계</td>
+                            <td class="text-end fw-bold">{{ team_total_amount|floatformat:0|intcomma }}</td>
+                            <td class="text-center fw-bold">{{ team_total_count }}</td>
+                        </tr>
+                        {% endif %}
+                    {% else %}
+                        {% for member in personal_performance_text %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td>{{ member.name }}</td>
+                            <td class="text-center">{{ current_year }}-{{ current_month|stringformat:"02d" }}</td>
+                            <td class="text-end">{{ member.value|floatformat:0|intcomma }}</td>
+                            <td class="text-center">{{ member.count }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">표시할 데이터가 없습니다.</td>
+                        </tr>
+                        {% endfor %}
+                        {% if personal_performance_text %}
+                        <tr class="total-row">
+                            <td colspan="3" class="text-center fw-bold">합계</td>
+                            <td class="text-end fw-bold">{{ personal_total_amount|floatformat:0|intcomma }}</td>
+                            <td class="text-center fw-bold">{{ personal_total_count }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 당일 계약건 목록 -->
+{% if today_contracts %}
+<div class="card mt-4">
+    <div class="card-header bg-info text-white">
+        <h6 class="mb-0">
+            <i class="bi bi-calendar-day"></i> 오늘의 계약건 ({{ today|date:"Y년 m월 d일" }}) 
+            <span class="badge bg-light text-dark ms-2">{{ today_contracts|length }}건</span>
+        </h6>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-sm table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 40%;">업체명</th>
+                        <th style="width: 20%;">담당자</th>
+                        <th style="width: 40%;" class="text-end">금액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contract in today_contracts %}
+                    <tr>
+                        <td>{{ contract.company_name }}</td>
+                        <td>{{ contract.team_member.name|default:"미지정" }}</td>
+                        <td class="text-end">{{ contract.payment_amount|floatformat:0|intcomma }}원</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+function resetFilter() {
+    window.location.href = "{% url 'dashboard' %}";
+}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

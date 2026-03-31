@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}계약업체 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+    <h2 class="mb-2 mb-md-0"><i class="bi bi-building"></i> 계약업체</h2>
+</div>
+
+<!-- 필터 -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-12 col-md-4">
+                <label class="form-label mb-2 d-block d-md-none">검색</label>
+                <input type="text" class="form-control" name="search" placeholder="업체명, 대표자명, 전화번호 검색" value="{{ search }}">
+                <input type="hidden" name="page" value="1">
+            </div>
+            <div class="col-12 col-md-3">
+                <label class="form-label mb-2 d-block d-md-none">팀</label>
+                <select class="form-select" name="team">
+                    <option value="">전체 팀</option>
+                    {% for team in teams %}
+                        <option value="{{ team.id }}" {% if team_filter == team.id|stringformat:"s" %}selected{% endif %}>{{ team.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-2">
+                <label class="form-label mb-2 d-block d-md-none" style="opacity: 0;">검색</label>
+                <button type="submit" class="btn btn-primary w-100">검색</button>
+            </div>
+        </form>
+        <div class="mt-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+            <div class="mb-2 mb-md-0">
+                <span class="text-muted">총 <strong>{{ page_obj.paginator.count }}</strong>건</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 계약업체 리스트 -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>업체명</th>
+                        <th>계약 유형</th>
+                        <th>대표자명</th>
+                        <th>전화번호</th>
+                        <th>계약일</th>
+                        <th>계약만료일</th>
+                        <th>결제금액</th>
+                        <th>담당 팀원</th>
+                        <th>담당 팀</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ company.company_name }}</td>
+                        <td>
+                            {% if company.contract_type %}
+                            <span class="badge bg-{{ company.get_contract_type_display_class }}">
+                                {{ company.get_contract_type_display }}
+                            </span>
+                            {% else %}
+                            <span class="badge bg-secondary">신규 계약</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ company.representative }}</td>
+                        <td>{{ company.phone }}</td>
+                        <td>{{ company.contract_date|date:"Y-m-d" }}</td>
+                        <td>{{ company.contract_expiry|date:"Y-m-d" }}</td>
+                        <td>{{ company.payment_amount|floatformat:0|intcomma }}원</td>
+                        <td>{{ company.team_member.name|default:"-" }}</td>
+                        <td>{{ company.team.name|default:"-" }}</td>
+                        <td>{{ company.notes|default:"-" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-center text-muted">등록된 계약업체가 없습니다.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 페이지네이션 -->
+        {% if page_obj.has_other_pages %}
+        <nav aria-label="Page navigation" class="mt-3">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}">처음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}">이전</a>
+                </li>
+                {% endif %}
+                
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+                
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}">다음</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}{% if team_filter %}&team={{ team_filter }}{% endif %}">마지막</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

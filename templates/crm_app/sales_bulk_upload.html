@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}엑셀 일괄 등록 - 인컴 CRM{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-file-earmark-spreadsheet"></i> 엑셀 일괄 등록</h2>
+    <div>
+        <a href="{% url 'sales_template_download' %}" class="btn btn-info me-2">
+            <i class="bi bi-download"></i> 엑셀 양식 다운로드
+        </a>
+        <a href="{% url 'sales_list' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> 목록으로
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">엑셀 파일 업로드</h5>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info">
+            <h6><i class="bi bi-info-circle"></i> 사용 방법</h6>
+            <ol class="mb-0">
+                <li>위의 "엑셀 양식 다운로드" 버튼을 클릭하여 템플릿을 다운로드합니다.</li>
+                <li>템플릿에 매출 정보를 입력합니다.</li>
+                <li>완성된 엑셀 파일을 선택하여 업로드합니다.</li>
+            </ol>
+        </div>
+        
+        <div class="alert alert-warning">
+            <h6><i class="bi bi-exclamation-triangle"></i> 주의사항</h6>
+            <ul class="mb-0">
+                <li><strong>필수 입력 항목:</strong> 업체명, 계약일, 계약만료일, 결제금액</li>
+                <li><strong>날짜 형식:</strong> YYYY-MM-DD (예: 2024-01-15)</li>
+                <li><strong>결제금액:</strong> 숫자만 입력 (예: 1000000)</li>
+                <li><strong>담당팀원/담당팀:</strong> 이름으로 입력 (팀원 목록에 등록된 이름만 인식)</li>
+            </ul>
+        </div>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="excel_file" class="form-label">엑셀 파일 선택</label>
+                <input type="file" class="form-control" id="excel_file" name="excel_file" accept=".xlsx,.xls" required>
+                <small class="form-text text-muted">엑셀 파일 (.xlsx, .xls)만 업로드 가능합니다.</small>
+            </div>
+            
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'sales_list' %}" class="btn btn-secondary me-2">취소</a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-upload"></i> 업로드
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
